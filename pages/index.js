@@ -1,4 +1,5 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import React from 'react';
 import appConfig from '../config.json';
 
 //Componente React
@@ -63,7 +64,8 @@ function Titulo(props){
 // export default HomePage
 
 export default function PaginaInicial() {
-    const username = 'Diogo0602x';
+    // const username = 'Diogo0602x';
+    const [username, setUsername] = React.useState('Diogo0602x');
   
     return (
       <>
@@ -103,7 +105,29 @@ export default function PaginaInicial() {
                 {appConfig.name}
               </Text>
   
+              {/* <input
+                type="text"
+                value={username}
+                onChange={function (event) {
+                  console.log('usuario digitou', event)
+                  // Onde tá o valor?
+                  const valor = event.target.value;
+                  // Trocar o valor da variável
+                  // Através do React e avise quem precisa
+                  setUsername(valor);
+                }}
+              /> */}
+
               <TextField
+                value={username}
+                onChange={function (event) {
+                  console.log('usuario digitou', event)
+                  // Onde tá o valor?
+                  const valor = event.target.value;
+                  // Trocar o valor da variável
+                  // Através do React e avise quem precisa
+                  setUsername(valor);
+                }}
                 fullWidth
                 textFieldColors={{
                   neutral: {
