@@ -3,55 +3,23 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
-//Componente React
-//Função recebe um argumento/propriedade
-function GlobalStyle() {
-    return (
-      <style global jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-          font-family: 'Open Sans', sans-serif;
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-  }
-  
-
-function Titulo(props){
-    console.log(props);
-    const Tag = props.tag;
-    return (
-        <>
-        <Tag>{props.children}</Tag>
-            <style jsx>{`
-                ${Tag} {
-                    color: ${appConfig.theme.colors.neutrals['000']};
-                    font-size: 20px;
-                    font-weight:600;
-                }    
-            `}</style>
-        </>
-    );
+function Titulo(props) {
+  const Tag = props.tag || 'h1';
+  return (
+      <>
+          <Tag>{props.children}</Tag>
+          <style jsx>{`
+          ${Tag} {
+              color: ${appConfig.theme.colors.neutrals['000']};
+              font-size: 24px;
+              font-weight: 600;
+          }
+          `}</style>
+      </>
+  );
 }
 
+// Componente React
 // function HomePage() {
 //     //JSX
 //     return (
@@ -71,7 +39,6 @@ export default function PaginaInicial() {
   
     return (
       <>
-        <GlobalStyle />
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
