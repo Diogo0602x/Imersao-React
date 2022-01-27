@@ -176,9 +176,9 @@
   integrity sha512-tTga6OFfO2JS+Yt5hdryng259c/tzNgSWkdiU2E+RBHiysAIOta57n4PJ8iPahOSqEqjaToPI76wM+o441GaNQ==
 
 "@skynexui/components@latest":
-  version "1.24.2"
-  resolved "https://registry.yarnpkg.com/@skynexui/components/-/components-1.24.2.tgz#aeaaffe0591f534bb7d2717727e52bfd877b4aa1"
-  integrity sha512-y33kQyFgHs/p9CcdfwezAY3J8pWLQfUHByc87K4U5/Nn90Giepk+5KRTeJrnYEcCZRG+FP4rBIQ3UTCBDBlM6w==
+  version "1.24.0"
+  resolved "https://registry.yarnpkg.com/@skynexui/components/-/components-1.24.0.tgz#bc75cb9a877e30841a5fd44e5d4ed910e4b7ea8c"
+  integrity sha512-v0vvXlCg/Cp8FDxge1xan3ubxHTVd57lN8ynLjNDdBbeQsFQFIgDkmqdUlpHReWDbkhx03Ayp0EQ4k21o4L+BA==
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.36"
     "@fortawesome/fontawesome-free" "^5.15.4"
