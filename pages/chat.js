@@ -7,11 +7,9 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import { createClient } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
 
-
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM3NTUxNSwiZXhwIjoxOTU4OTUxNTE1fQ.L-J3dTqmb353o0GDBi_e9IW-4VWpGKQnYdtqdJ7EmtM'
 const SUPABASE_URL = 'https://vaueqrjygahdtjccjeek.supabase.co'
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
 
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
@@ -296,7 +294,6 @@ export default function ChatPage() {
             </Box>
         )
     }
-
 }
 
 
