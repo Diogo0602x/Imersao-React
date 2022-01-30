@@ -79,12 +79,12 @@ export default function ChatPage() {
           <MessageList mensagens={listaDeMensagens} />
 
           {/* {listaDeMensagens.map((mensagemAtual) =>{
-                        return(
-                            <li key={mensagemAtual.id}>
-                                {mensagemAtual.de}: {mensagemAtual.texto}
-                            </li>
-                        )
-                    })} */}
+            return(
+              <li key={mensagemAtual.id}>
+                {mensagemAtual.de}: {mensagemAtual.texto}
+              </li>
+            )
+          })} */}
 
           <Box
             as="form"
@@ -140,7 +140,13 @@ export default function ChatPage() {
                 }
               }}
             />
-            <ButtonSendSticker/>
+            {/* Callback */}
+            <ButtonSendSticker
+              onStickerClick={(sticker) => {
+                console.log('[USANDO O COMPONENTE] Salva esse sticker no banco', sticker);
+                handleNovaMensagem(':sticker:' + sticker)
+              }}
+            />
           </Box>
         </Box>
       </Box>
