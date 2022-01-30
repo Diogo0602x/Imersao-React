@@ -1,7 +1,8 @@
 /// <reference types="node" />
-import { IncomingMessage, ServerResponse } from 'http';
+import type { IncomingMessage, ServerResponse } from 'http';
 import { PreviewData } from 'next/types';
 import { NextApiRequest, NextApiResponse } from '../shared/lib/utils';
+import { BaseNextRequest, BaseNextResponse } from './base-http';
 export declare type NextApiRequestCookies = {
     [key: string]: string;
 };
@@ -18,7 +19,7 @@ export declare function apiResolver(req: IncomingMessage, res: ServerResponse, q
  * Parse incoming message like `json` or `urlencoded`
  * @param req request object
  */
-export declare function parseBody(req: NextApiRequest, limit: string | number): Promise<any>;
+export declare function parseBody(req: IncomingMessage, limit: string | number): Promise<any>;
 /**
  * Parse cookies from the `headers` of request
  * @param req request object
@@ -53,7 +54,8 @@ export declare function sendData(req: NextApiRequest, res: NextApiResponse, body
  */
 export declare function sendJson(res: NextApiResponse, jsonBody: any): void;
 export declare const SYMBOL_PREVIEW_DATA: unique symbol;
-export declare function tryGetPreviewData(req: IncomingMessage, res: ServerResponse, options: __ApiPreviewProps): PreviewData;
+export declare const SYMBOL_CLEARED_COOKIES: unique symbol;
+export declare function tryGetPreviewData(req: IncomingMessage | BaseNextRequest, res: ServerResponse | BaseNextResponse, options: __ApiPreviewProps): PreviewData;
 /**
  * Custom error class
  */

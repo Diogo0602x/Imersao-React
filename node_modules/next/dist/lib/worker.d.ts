@@ -1,4 +1,4 @@
-import { Worker as JestWorker } from 'jest-worker';
+import { Worker as JestWorker } from 'next/dist/compiled/jest-worker';
 declare type FarmOptions = ConstructorParameters<typeof JestWorker>[1];
 export declare class Worker {
     private _worker;

@@ -6,10 +6,7 @@
   "dependencies": {
     "@skynexui/components": "latest",
     "@supabase/supabase-js": "^1.29.4",
-<<<<<<< HEAD
     "extends": "eslint:recommended",
-=======
->>>>>>> e8eb86b8951b3dc6e3f0ed9bca40217128f0e658
     "next": "^12.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

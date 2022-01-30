@@ -1,12 +1,13 @@
 /// <reference types="node" />
-import type { ParsedUrlQuery } from 'querystring';
 import type { IncomingMessage } from 'http';
+import type { ParsedUrlQuery } from 'querystring';
 import type { UrlWithParsedQuery } from 'url';
-declare const NEXT_REQUEST_META: unique symbol;
-interface NextIncomingMessage extends IncomingMessage {
+import { BaseNextRequest } from './base-http';
+export declare const NEXT_REQUEST_META: unique symbol;
+export declare type NextIncomingMessage = (BaseNextRequest | IncomingMessage) & {
     [NEXT_REQUEST_META]?: RequestMeta;
-}
-interface RequestMeta {
+};
+export interface RequestMeta {
     __NEXT_INIT_QUERY?: ParsedUrlQuery;
     __NEXT_INIT_URL?: string;
     __nextHadTrailingSlash?: boolean;
@@ -32,4 +33,3 @@ export declare type NextParsedUrlQuery = ParsedUrlQuery & {
 export interface NextUrlWithParsedQuery extends UrlWithParsedQuery {
     query: NextParsedUrlQuery;
 }
-export {};

@@ -10,7 +10,7 @@ exports.info = info;
 exports.event = event;
 exports.trace = trace;
 exports.prefixes = void 0;
-var _chalk = _interopRequireDefault(require("next/dist/compiled/chalk"));
+var _chalk = _interopRequireDefault(require("../../lib/chalk"));
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         default: obj

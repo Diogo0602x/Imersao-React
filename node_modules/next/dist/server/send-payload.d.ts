@@ -1,5 +1,6 @@
 /// <reference types="node" />
-import { IncomingMessage, ServerResponse } from 'http';
+import type { IncomingMessage, ServerResponse } from 'http';
+import type { BaseNextResponse } from './base-http';
 import RenderResult from './render-result';
 export declare type PayloadOptions = {
     private: true;
@@ -11,7 +12,7 @@ export declare type PayloadOptions = {
     stateful: false;
     revalidate: number | false;
 };
-export declare function setRevalidateHeaders(res: ServerResponse, options: PayloadOptions): void;
+export declare function setRevalidateHeaders(res: ServerResponse | BaseNextResponse, options: PayloadOptions): void;
 export declare function sendRenderResult({ req, res, result, type, generateEtags, poweredByHeader, options, }: {
     req: IncomingMessage;
     res: ServerResponse;

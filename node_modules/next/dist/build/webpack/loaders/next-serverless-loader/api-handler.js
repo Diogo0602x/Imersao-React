@@ -4,13 +4,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getApiHandler = getApiHandler;
 var _url = require("url");
+var _http = require("http");
 var _apiUtils = require("../../../../server/api-utils");
 var _utils = require("./utils");
 var _utils1 = require("../../../../shared/lib/utils");
+var _baseHttp = require("../../../../server/base-http");
 function getApiHandler(ctx) {
     const { pageModule , encodedPreviewProps , pageIsDynamic  } = ctx;
     const { handleRewrites , handleBasePath , dynamicRouteMatcher , normalizeDynamicRouteParams ,  } = (0, _utils).getUtils(ctx);
-    return async (req, res)=>{
+    return async (rawReq, rawRes)=>{
+        const req = rawReq instanceof _http.IncomingMessage ? new _baseHttp.NodeNextRequest(rawReq) : rawReq;
+        const res = rawRes instanceof _http.ServerResponse ? new _baseHttp.NodeNextResponse(rawRes) : rawRes;
         try {
             // We need to trust the dynamic route params from the proxy
             // to ensure we are using the correct values
@@ -26,13 +30,13 @@ function getApiHandler(ctx) {
                 const result = normalizeDynamicRouteParams(trustQuery ? parsedUrl.query : dynamicRouteMatcher(parsedUrl.pathname));
                 params = result.params;
             }
-            await (0, _apiUtils).apiResolver(req, res, Object.assign({
+            await (0, _apiUtils).apiResolver(req.originalRequest, res.originalResponse, Object.assign({
             }, parsedUrl.query, params), await pageModule, encodedPreviewProps, true);
         } catch (err) {
             console.error(err);
             if (err instanceof _utils1.DecodeError) {
                 res.statusCode = 400;
-                res.end('Bad Request');
+                res.body('Bad Request').send();
             } else {
                 // Throw the error to crash the serverless function
                 throw err;

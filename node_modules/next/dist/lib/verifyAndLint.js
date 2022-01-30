@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.verifyAndLint = verifyAndLint;
 var _chalk = _interopRequireDefault(require("next/dist/compiled/chalk"));
-var _jestWorker = require("jest-worker");
+var _jestWorker = require("next/dist/compiled/jest-worker");
 var _fs = require("fs");
 var _path = require("path");
 var _constants = require("./constants");

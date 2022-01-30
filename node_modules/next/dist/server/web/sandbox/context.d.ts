@@ -16,6 +16,7 @@ export declare function getModuleContext(options: {
     module: string;
     onWarning: (warn: Error) => void;
     useCache: boolean;
+    env: string[];
 }): {
     context: Context;
     runInContext: (paramPath: string) => void;

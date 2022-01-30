@@ -51,6 +51,7 @@ export declare type RenderOptsPartial = {
     disableOptimizedLoading?: boolean;
     supportsDynamicHTML?: boolean;
     concurrentFeatures?: boolean;
+    serverComponents?: boolean;
     customServer?: boolean;
     crossOrigin?: string;
 };

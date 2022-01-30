@@ -52,6 +52,7 @@ class Router {
         this.dynamicRoutes = dynamicRoutes;
         this.useFileSystemPublicRoutes = useFileSystemPublicRoutes;
         this.locales = locales;
+        this.seenRequests = new Set();
     }
     setDynamicRoutes(routes = []) {
         this.dynamicRoutes = routes;
@@ -60,6 +61,10 @@ class Router {
         this.fsRoutes.unshift(fsRoute);
     }
     async execute(req, res, parsedUrl) {
+        if (this.seenRequests.has(req)) {
+            throw new Error(`Invariant: request has already been processed: ${req.url}, this is an internal error please open an issue.`);
+        }
+        this.seenRequests.add(req);
         // memoize page check calls so we don't duplicate checks for pages
         const pageChecks = {
         };
@@ -213,6 +218,7 @@ class Router {
                     if (!originallyHadBasePath && !(0, _requestMeta).getRequestMeta(req, '_nextDidRewrite')) {
                         if (requireBasePath) {
                             // consider this a non-match so the 404 renders
+                            this.seenRequests.delete(req);
                             return false;
                         }
                         continue;
@@ -222,6 +228,7 @@ class Router {
                 const result = await testRoute.fn(req, res, newParams, parsedUrlUpdated);
                 // The response was handled
                 if (result.finished) {
+                    this.seenRequests.delete(req);
                     return true;
                 }
                 // since the fs route didn't finish routing we need to re-add the
@@ -241,11 +248,13 @@ class Router {
                 // check filesystem
                 if (testRoute.check === true) {
                     if (await applyCheckTrue(parsedUrlUpdated)) {
+                        this.seenRequests.delete(req);
                         return true;
                     }
                 }
             }
         }
+        this.seenRequests.delete(req);
         return false;
     }
 }

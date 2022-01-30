@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.findPageFile = findPageFile;
 var _path = require("path");
-var _chalk = _interopRequireDefault(require("next/dist/compiled/chalk"));
+var _chalk = _interopRequireDefault(require("../../lib/chalk"));
 var _log = require("../../build/output/log");
 var _fs = require("fs");
 var _normalizePagePath = require("../normalize-page-path");

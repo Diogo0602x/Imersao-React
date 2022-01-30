@@ -59,7 +59,8 @@ function pitch() {
     (async ()=>{
         let loaderOptions = this.getOptions() || {
         };
-        if (loaderOptions.fileReading && !EXCLUDED_PATHS.test(this.resourcePath) && this.loaders.length - 1 === this.loaderIndex && (0, _path).isAbsolute(this.resourcePath) && !await (0, _swc).isWasm()) {
+        if (// TODO: investigate swc file reading in PnP mode?
+        !process.versions.pnp && loaderOptions.fileReading && !EXCLUDED_PATHS.test(this.resourcePath) && this.loaders.length - 1 === this.loaderIndex && (0, _path).isAbsolute(this.resourcePath) && !await (0, _swc).isWasm()) {
             const loaderSpan = this.currentTraceSpan.traceChild('next-swc-loader');
             this.addDependency(this.resourcePath);
             return loaderSpan.traceAsyncFn(()=>loaderTransform.call(this, loaderSpan)

@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports._postPayload = _postPayload;
 var _asyncRetry = _interopRequireDefault(require("next/dist/compiled/async-retry"));
-var _nodeFetch = _interopRequireDefault(require("node-fetch"));
+var _nodeFetch = _interopRequireDefault(require("next/dist/compiled/node-fetch"));
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         default: obj

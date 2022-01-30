@@ -1,5 +1,5 @@
 "use strict";
-var _nodeFetch = _interopRequireWildcard(require("node-fetch"));
+var _nodeFetch = _interopRequireWildcard(require("next/dist/compiled/node-fetch"));
 function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
         return obj;

@@ -5,7 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.getRequestMeta = getRequestMeta;
 exports.setRequestMeta = setRequestMeta;
 exports.addRequestMeta = addRequestMeta;
+exports.NEXT_REQUEST_META = void 0;
 const NEXT_REQUEST_META = Symbol('NextRequestMeta');
+exports.NEXT_REQUEST_META = NEXT_REQUEST_META;
 function getRequestMeta(req, key) {
     const meta = req[NEXT_REQUEST_META] || {
     };

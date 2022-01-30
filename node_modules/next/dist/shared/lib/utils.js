@@ -11,8 +11,8 @@ exports.normalizeRepeatedSlashes = normalizeRepeatedSlashes;
 exports.loadGetInitialProps = loadGetInitialProps;
 exports.formatWithValidation = formatWithValidation;
 exports.HtmlContext = exports.ST = exports.SP = exports.urlObjectKeys = void 0;
-var _formatUrl = require("./router/utils/format-url");
 var _react = require("react");
+var _formatUrl = require("./router/utils/format-url");
 function execOnce(fn) {
     let used = false;
     let result;

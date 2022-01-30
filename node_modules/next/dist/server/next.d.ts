@@ -1,8 +1,13 @@
+/// <reference types="node" />
 import type { Options as DevServerOptions } from './dev/next-dev-server';
-import type { RequestHandler } from './next-server';
 import './node-polyfill-fetch';
 import { default as Server } from './next-server';
+import { IncomingMessage, ServerResponse } from 'http';
+import { NextUrlWithParsedQuery } from './request-meta';
 export declare type NextServerOptions = Partial<DevServerOptions>;
+export interface RequestHandler {
+    (req: IncomingMessage, res: ServerResponse, parsedUrl?: NextUrlWithParsedQuery | undefined): Promise<void>;
+}
 export declare class NextServer {
     private serverPromise?;
     private server?;
@@ -30,4 +35,3 @@ export declare class NextServer {
 }
 declare function createServer(options: NextServerOptions): NextServer;
 export default createServer;
-export type { RequestHandler };

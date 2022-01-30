@@ -1,4 +1,4 @@
-import { NextConfig } from '../server/config';
+import type { NextConfig } from '../server/config';
 export declare type RouteHas = {
     type: 'header' | 'query' | 'cookie';
     key: string;

@@ -58,5 +58,6 @@ export declare class NextURL {
     set basePath(value: string);
     toString(): string;
     toJSON(): string;
+    clone(): NextURL;
 }
 export {};

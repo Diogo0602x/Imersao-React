@@ -21,9 +21,8 @@ Object.defineProperty(exports, "normalizeConfig", {
     }
 });
 exports.default = loadConfig;
-exports.isTargetLikeServerless = isTargetLikeServerless;
 exports.setHttpAgentOptions = setHttpAgentOptions;
-var _chalk = _interopRequireDefault(require("next/dist/compiled/chalk"));
+var _chalk = _interopRequireDefault(require("../lib/chalk"));
 var _findUp = _interopRequireDefault(require("next/dist/compiled/find-up"));
 var _path = require("path");
 var _url = require("url");
@@ -460,11 +459,6 @@ async function loadConfig(phase, dir, customConfig) {
     completeConfig.configFileName = configFileName;
     setHttpAgentOptions(completeConfig.httpAgentOptions);
     return completeConfig;
-}
-function isTargetLikeServerless(target) {
-    const isServerless = target === 'serverless';
-    const isServerlessTrace = target === 'experimental-serverless-trace';
-    return isServerless || isServerlessTrace;
 }
 function setHttpAgentOptions(options) {
     if (global.__NEXT_HTTP_AGENT) {

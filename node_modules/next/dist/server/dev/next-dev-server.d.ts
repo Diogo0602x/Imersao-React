@@ -3,7 +3,6 @@ import type { __ApiPreviewProps } from '../api-utils';
 import type { CustomRoutes } from '../../lib/load-custom-routes';
 import type { FetchEventResult } from '../web/types';
 import type { FindComponentsResult } from '../next-server';
-import type { IncomingMessage, ServerResponse } from 'http';
 import type { LoadComponentsReturnType } from '../load-components';
 import type { Options as ServerOptions } from '../next-server';
 import type { Params } from '../router';
@@ -12,6 +11,7 @@ import type { ParsedUrlQuery } from 'querystring';
 import type { Server as HTTPServer } from 'http';
 import type { UrlWithParsedQuery } from 'url';
 import Server from '../next-server';
+import { BaseNextRequest, BaseNextResponse, NodeNextResponse, NodeNextRequest } from '../base-http';
 export interface Options extends ServerOptions {
     /**
      * The HTTP Server that Next.js is running behind
@@ -30,7 +30,9 @@ export default class DevServer extends Server {
     private isCustomServer;
     protected sortedRoutes?: string[];
     private addedUpgradeListener;
-    protected staticPathsWorker?: import('jest-worker').Worker & {
+    protected staticPathsWorker?: {
+        [key: string]: any;
+    } & {
         loadStaticPaths: typeof import('./static-paths-worker').loadStaticPaths;
     };
     private getStaticPathsWorker;
@@ -42,15 +44,15 @@ export default class DevServer extends Server {
     prepare(): Promise<void>;
     protected close(): Promise<void>;
     protected hasPage(pathname: string): Promise<boolean>;
-    protected _beforeCatchAllRender(req: IncomingMessage, res: ServerResponse, params: Params, parsedUrl: UrlWithParsedQuery): Promise<boolean>;
+    protected _beforeCatchAllRender(req: BaseNextRequest, res: BaseNextResponse, params: Params, parsedUrl: UrlWithParsedQuery): Promise<boolean>;
     private setupWebSocketHandler;
     runMiddleware(params: {
-        request: IncomingMessage;
-        response: ServerResponse;
+        request: BaseNextRequest;
+        response: BaseNextResponse;
         parsedUrl: ParsedNextUrl;
         parsed: UrlWithParsedQuery;
     }): Promise<FetchEventResult | null>;
-    run(req: IncomingMessage, res: ServerResponse, parsedUrl: UrlWithParsedQuery): Promise<void>;
+    run(req: NodeNextRequest, res: NodeNextResponse, parsedUrl: UrlWithParsedQuery): Promise<void>;
     private logErrorWithOriginalStack;
     protected getCustomRoutes(): CustomRoutes;
     private _devCachedPreviewProps;
@@ -91,7 +93,7 @@ export default class DevServer extends Server {
     protected ensureApiPage(pathname: string): Promise<any>;
     protected findPageComponents(pathname: string, query?: ParsedUrlQuery, params?: Params | null): Promise<FindComponentsResult | null>;
     protected getFallbackErrorComponents(): Promise<LoadComponentsReturnType | null>;
-    protected setImmutableAssetCacheControl(res: ServerResponse): void;
+    protected setImmutableAssetCacheControl(res: BaseNextResponse): void;
     private servePublic;
     hasPublicFile(path: string): Promise<boolean>;
     getCompilationError(page: string): Promise<any>;

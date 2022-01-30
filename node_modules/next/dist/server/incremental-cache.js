@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 var _lruCache = _interopRequireDefault(require("next/dist/compiled/lru-cache"));
 var _path = _interopRequireDefault(require("path"));
-var _constants = require("../shared/lib/constants");
 var _normalizePagePath = require("./normalize-page-path");
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -15,7 +14,7 @@ function toRoute(pathname) {
     return pathname.replace(/\/$/, '').replace(/\/index$/, '') || '/';
 }
 class IncrementalCache {
-    constructor({ fs , max , dev , distDir , pagesDir , flushToDisk , locales  }){
+    constructor({ fs , max , dev , distDir , pagesDir , flushToDisk , locales , getPrerenderManifest  }){
         this.fs = fs;
         this.incrementalOptions = {
             dev,
@@ -24,20 +23,7 @@ class IncrementalCache {
             flushToDisk: !dev && (typeof flushToDisk !== 'undefined' ? flushToDisk : true)
         };
         this.locales = locales;
-        if (dev) {
-            this.prerenderManifest = {
-                version: -1,
-                routes: {
-                },
-                dynamicRoutes: {
-                },
-                notFoundRoutes: [],
-                preview: null
-            };
-        } else {
-            const manifestJson = this.fs.readFileSync(_path.default.join(distDir, _constants.PRERENDER_MANIFEST));
-            this.prerenderManifest = JSON.parse(manifestJson);
-        }
+        this.prerenderManifest = getPrerenderManifest();
         if (process.env.__NEXT_TEST_MAX_ISR_CACHE) {
             // Allow cache size to be overridden for testing purposes
             max = parseInt(process.env.__NEXT_TEST_MAX_ISR_CACHE, 10);

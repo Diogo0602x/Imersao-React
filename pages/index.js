@@ -160,10 +160,10 @@ export default function PaginaInicial() {
                 label='Entrar'
                 fullWidth
                 buttonColors={{
-                  contrastColor: appConfig.theme.colors.neutrals["000"],
-                  mainColor: appConfig.theme.colors.transparente.buttonRed,
-                  mainColorLight: appConfig.theme.colors.primary[400],
-                  mainColorStrong: appConfig.theme.colors.transparente.buttonBlack,
+                  contrastColor: appConfig.theme.colors.neutrals["900"],
+                  mainColor: appConfig.theme.colors.primary[999],
+                  mainColorLight: appConfig.theme.colors.primary[999],
+                  mainColorStrong: appConfig.theme.colors.primary[300],
                 }}
               />
             </Box>

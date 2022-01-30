@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.processBuffer = processBuffer;
 exports.decodeBuffer = decodeBuffer;
-var _jestWorker = require("jest-worker");
+var _jestWorker = require("next/dist/compiled/jest-worker");
 var path = _interopRequireWildcard(require("path"));
 var _utils = require("../../../shared/lib/utils");
 var _os = require("os");

@@ -1,12 +1,13 @@
 /// <reference types="node" />
-import { IncomingMessage, ServerResponse } from 'http';
+import type { IncomingMessage, ServerResponse } from 'http';
+import type { Rewrite } from '../../../../lib/load-custom-routes';
+import type { BuildManifest } from '../../../../server/get-page-files';
+import type { NextConfig } from '../../../../server/config';
+import type { GetServerSideProps, GetStaticPaths, GetStaticProps } from '../../../../types';
 import { UrlWithParsedQuery } from 'url';
 import { ParsedUrlQuery } from 'querystring';
-import { Rewrite } from '../../../../lib/load-custom-routes';
 import { __ApiPreviewProps } from '../../../../server/api-utils';
-import { BuildManifest } from '../../../../server/get-page-files';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from '../../../../types';
-import { NextConfig } from '../../../../server/config';
+import { BaseNextRequest } from '../../../../server/base-http';
 export declare const vercelHeader = "x-vercel-id";
 export declare type ServerlessHandlerCtx = {
     page: string;
@@ -48,16 +49,16 @@ export declare function getUtils({ page, i18n, basePath, rewrites, pageIsDynamic
         detectedLocale: string;
         routeNoAssetPath: string;
     } | undefined;
-    handleRewrites: (req: IncomingMessage, parsedUrl: UrlWithParsedQuery) => UrlWithParsedQuery;
-    handleBasePath: (req: IncomingMessage, parsedUrl: UrlWithParsedQuery) => void;
+    handleRewrites: (req: BaseNextRequest | IncomingMessage, parsedUrl: UrlWithParsedQuery) => UrlWithParsedQuery;
+    handleBasePath: (req: BaseNextRequest | IncomingMessage, parsedUrl: UrlWithParsedQuery) => void;
     defaultRouteRegex: import("../../../../shared/lib/router/utils/route-regex").RouteRegex | undefined;
-    normalizeVercelUrl: (req: IncomingMessage, trustQuery: boolean) => void;
+    normalizeVercelUrl: (req: BaseNextRequest | IncomingMessage, trustQuery: boolean) => void;
     dynamicRouteMatcher: ((pathname: string | null | undefined) => false | {
         [paramName: string]: string | string[];
     }) | undefined;
     defaultRouteMatches: ParsedUrlQuery | undefined;
     interpolateDynamicPath: (pathname: string, params: ParsedUrlQuery) => string;
-    getParamsFromRouteMatches: (req: IncomingMessage, renderOpts?: any, detectedLocale?: string | undefined) => ParsedUrlQuery;
+    getParamsFromRouteMatches: (req: BaseNextRequest | IncomingMessage, renderOpts?: any, detectedLocale?: string | undefined) => ParsedUrlQuery;
     normalizeDynamicRouteParams: (params: ParsedUrlQuery) => {
         params: ParsedUrlQuery;
         hasValidParams: boolean;

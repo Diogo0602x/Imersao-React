@@ -45,6 +45,9 @@ export declare type NextConfig = {
         fallback: Rewrite[];
     }>;
     redirects?: () => Promise<Redirect[]>;
+    /**
+     * @deprecated This option has been removed as webpack 5 is now default
+     */
     webpack5?: false;
     excludeDefaultMomentLocales?: boolean;
     webpack?: ((config: any, context: {
@@ -102,7 +105,7 @@ export declare type NextConfig = {
     };
     future?: {
         /**
-         * @deprecated this options was moved to the top level
+         * @deprecated This option has been removed as webpack 5 is now default
          */
         webpack5?: false;
     };

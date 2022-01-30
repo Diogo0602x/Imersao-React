@@ -175,6 +175,9 @@ class NextURL {
     toJSON() {
         return this.href;
     }
+    clone() {
+        return new NextURL(String(this), this[Internal].options);
+    }
 }
 exports.NextURL = NextURL;
 const REGEX_LOCALHOST_HOSTNAME = /(?!^https?:\/\/)(127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|::1|localhost)/;

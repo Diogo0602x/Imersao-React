@@ -8,7 +8,8 @@ async function run(params) {
     const { runInContext , context  } = (0, _context).getModuleContext({
         module: params.name,
         onWarning: params.onWarning,
-        useCache: params.useCache !== false
+        useCache: params.useCache !== false,
+        env: params.env
     });
     for (const paramPath of params.paths){
         runInContext(paramPath);

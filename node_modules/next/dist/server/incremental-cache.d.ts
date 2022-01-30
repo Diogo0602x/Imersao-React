@@ -1,7 +1,7 @@
 /// <reference types="lru-cache" />
+import type { CacheFs } from '../shared/lib/utils';
 import LRUCache from 'next/dist/compiled/lru-cache';
 import { PrerenderManifest } from '../build';
-import type { CacheFs } from '../shared/lib/utils';
 interface CachedRedirectValue {
     kind: 'REDIRECT';
     props: Object;
@@ -29,7 +29,7 @@ export declare class IncrementalCache {
     cache?: LRUCache<string, IncrementalCacheEntry>;
     locales?: string[];
     fs: CacheFs;
-    constructor({ fs, max, dev, distDir, pagesDir, flushToDisk, locales, }: {
+    constructor({ fs, max, dev, distDir, pagesDir, flushToDisk, locales, getPrerenderManifest, }: {
         fs: CacheFs;
         dev: boolean;
         max?: number;
@@ -37,6 +37,7 @@ export declare class IncrementalCache {
         pagesDir: string;
         flushToDisk?: boolean;
         locales?: string[];
+        getPrerenderManifest: () => PrerenderManifest;
     });
     private getSeedPath;
     private calculateRevalidate;

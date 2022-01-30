@@ -1,3 +1,4 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { ServerlessHandlerCtx } from './utils';
-export declare function getApiHandler(ctx: ServerlessHandlerCtx): (req: IncomingMessage, res: ServerResponse) => Promise<void>;
+import { NodeNextResponse, NodeNextRequest } from '../../../../server/base-http';
+export declare function getApiHandler(ctx: ServerlessHandlerCtx): (rawReq: NodeNextRequest | IncomingMessage, rawRes: NodeNextResponse | ServerResponse) => Promise<void>;

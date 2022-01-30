@@ -2,8 +2,8 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { UrlWithParsedQuery } from 'url';
 import { NextConfig } from './config-shared';
-import type Server from './base-server';
-export declare function imageOptimizer(server: Server, req: IncomingMessage, res: ServerResponse, parsedUrl: UrlWithParsedQuery, nextConfig: NextConfig, distDir: string, isDev?: boolean): Promise<{
+import { NextUrlWithParsedQuery } from './request-meta';
+export declare function imageOptimizer(req: IncomingMessage, res: ServerResponse, parsedUrl: UrlWithParsedQuery, nextConfig: NextConfig, distDir: string, render404: () => Promise<void>, handleRequest: (newReq: IncomingMessage, newRes: ServerResponse, newParsedUrl?: NextUrlWithParsedQuery) => Promise<void>, isDev?: boolean): Promise<{
     finished: boolean;
 }>;
 /**

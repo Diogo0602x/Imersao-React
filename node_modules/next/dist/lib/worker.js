@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jestWorker = require("jest-worker");
+var _jestWorker = require("next/dist/compiled/jest-worker");
 const RESTARTED = Symbol('restarted');
 class Worker {
     constructor(workerPath, options){

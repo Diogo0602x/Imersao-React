@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 declare const VALID_LOADING_VALUES: readonly ["lazy", "eager", undefined];
 declare type LoadingValue = typeof VALID_LOADING_VALUES[number];
 export declare type ImageLoader = (resolverProps: ImageLoaderProps) => string;
@@ -28,6 +28,7 @@ export declare type ImageProps = Omit<JSX.IntrinsicElements['img'], 'src' | 'src
     quality?: number | string;
     priority?: boolean;
     loading?: LoadingValue;
+    lazyRoot?: React.RefObject<HTMLElement> | null;
     lazyBoundary?: string;
     placeholder?: PlaceholderValue;
     blurDataURL?: string;
@@ -36,5 +37,5 @@ export declare type ImageProps = Omit<JSX.IntrinsicElements['img'], 'src' | 'src
     objectPosition?: ImgElementStyle['objectPosition'];
     onLoadingComplete?: OnLoadingComplete;
 };
-export default function Image({ src, sizes, unoptimized, priority, loading, lazyBoundary, className, quality, width, height, objectFit, objectPosition, onLoadingComplete, loader, placeholder, blurDataURL, ...all }: ImageProps): JSX.Element;
+export default function Image({ src, sizes, unoptimized, priority, loading, lazyRoot, lazyBoundary, className, quality, width, height, objectFit, objectPosition, onLoadingComplete, loader, placeholder, blurDataURL, ...all }: ImageProps): JSX.Element;
 export {};
