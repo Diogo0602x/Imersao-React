@@ -12,27 +12,53 @@ const SUPABASE_ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vb
 const SUPABASE_URL = "https://vaueqrjygahdtjccjeek.supabase.co";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+function escutaMensagensEmTempoReal(adicionaMensagem) {
+  return supabaseClient
+    .from('mensagens')
+    .on('INSERT', (respostaLive) => {
+      adicionaMensagem(respostaLive.new);
+    })
+    .subscribe();
+}
+
 export default function ChatPage() {
-  const [mensagem, setMensagem] = React.useState("");
-  const [listaDeMensagens, setListaMensagens] = React.useState([
-    // {
-    //   id: 1,
-    //   de: 'diogo0602x',
-    //   texto: ':sticker: URL_da_imagem'
-    // }
-  ]);
   const roteamento = useRouter();
   const usuarioLogado = roteamento.query.username;
+  const [mensagem, setMensagem] = React.useState('');
+  const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
   React.useEffect(() => {
     supabaseClient
-      .from("mensagens")
-      .select("*")
-      .order("id", { ascending: false })
+      .from('mensagens')
+      .select('*')
+      .order('id', { ascending: false })
       .then(({ data }) => {
-        console.log("Dados da consulta", data);
-        setListaMensagens(data);
+        // console.log('Dados da consulta:', data);
+        setListaDeMensagens(data);
       });
+
+    const subscription = escutaMensagensEmTempoReal((novaMensagem) => {
+      console.log('Nova mensagem:', novaMensagem);
+      console.log('listaDeMensagens:', listaDeMensagens);
+      // Quero reusar um valor de referencia (objeto/array) 
+      // Passar uma função pro setState
+
+      // setListaDeMensagens([
+      //     novaMensagem,
+      //     ...listaDeMensagens
+      // ])
+      setListaDeMensagens((valorAtualDaLista) => {
+        console.log('valorAtualDaLista:', valorAtualDaLista);
+        return [
+          novaMensagem,
+          ...valorAtualDaLista,
+        ]
+      });
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    }
   }, []);
 
   return (
@@ -41,8 +67,7 @@ export default function ChatPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundImage:
-          "url(https://images.hdqwalls.com/wallpapers/dc-vs-marvel-heroes-5k-13.jpg)",
+        backgroundImage:"url(https://images.hdqwalls.com/wallpapers/dc-vs-marvel-heroes-5k-13.jpg)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundBlendMode: "multiply",
@@ -154,21 +179,23 @@ export default function ChatPage() {
   );
 
   function handleNovaMensagem(novaMensagem) {
-    const mensagemEnviada = {
+    const mensagem = {
       // id: listaDeMensagens.length + 1,
       de: usuarioLogado,
       texto: novaMensagem,
     };
 
     supabaseClient
-      .from("mensagens")
-      .insert([mensagemEnviada])
+      .from('mensagens')
+      .insert([
+        // Tem que ser um objeto com os MESMOS CAMPOS que você escreveu no supabase
+        mensagem
+      ])
       .then(({ data }) => {
-        console.log("Criando Mensagem: ", data);
-        setListaMensagens([data[0], ...listaDeMensagens]);
+        console.log('Criando mensagem: ', data);
       });
 
-    setMensagem("");
+    setMensagem('');
   }
 
   function Header() {
