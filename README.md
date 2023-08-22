@@ -11,3 +11,5 @@ Projeto desenvolvido durante a Imersão React da Alura
 
 # Imagem Chat <br>
 ![Miranha](https://github.com/Diogo0602x/Imersao-React/blob/master/public/images/superherochat.png)
+
+##
